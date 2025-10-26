@@ -50,7 +50,7 @@ export default function ManageBooking() {
   async function fetchBookings() {
     try {
       const res = await authFetch(
-        `${process.env.NEXT_BACKEND_API_URL}bookings`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}bookings`
       );
       const body = await res.json();
       const bookings = Object.values(body.data);
@@ -63,13 +63,16 @@ export default function ManageBooking() {
   async function cancelBooking(id: number) {
     try {
       setLoadingId(id);
-      await authFetch(`${process.env.NEXT_BACKEND_API_URL}/bookings/cancel`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ bookingId: id }),
-      });
+      await authFetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/bookings/cancel`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ bookingId: id }),
+        }
+      );
       await fetchBookings();
     } catch (error) {
       console.error("Error canceling booking:", error);

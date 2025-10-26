@@ -13,7 +13,7 @@ const Register = () => {
 
     const formData = new FormData(e.currentTarget);
     const plainData = Object.fromEntries(formData.entries());
-    fetch(`${process.env.NEXT_BACKEND_API_URL}/users`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

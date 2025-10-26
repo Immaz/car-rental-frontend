@@ -15,7 +15,7 @@ const LoginElement = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const plainData = Object.fromEntries(formData.entries());
-    fetch(`${process.env.NEXT_BACKEND_API_URL}/users/login`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

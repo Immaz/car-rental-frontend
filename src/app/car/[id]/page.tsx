@@ -29,7 +29,7 @@ export default function CarView() {
   async function fetchVehicle() {
     try {
       const res = await fetch(
-        `${process.env.NEXT_BACKEND_API_URL}/vehicles/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/vehicles/${id}`
       );
       const body = await res.json();
       setVehicle(body.data);
@@ -40,7 +40,7 @@ export default function CarView() {
   async function fetchReviews() {
     try {
       const res = await fetch(
-        `${process.env.NEXT_BACKEND_API_URL}/vehicles/reviews/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/vehicles/reviews/${id}`
       );
       const body = await res.json();
       const reviews = Object.values(body.data);
@@ -63,7 +63,7 @@ export default function CarView() {
   async function fetchBooking() {
     try {
       const res = await fetch(
-        `${process.env.NEXT_BACKEND_API_URL}/bookings/vehicle/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/bookings/vehicle/${id}`
       );
       const body = await res.json();
       const bookings = body.data;
@@ -122,7 +122,7 @@ export default function CarView() {
     const newReview = { name, rating, text: review, vehicle_id: id };
     try {
       const res = await authFetch(
-        `${process.env.NEXT_BACKEND_API_URL}/vehicles/review/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/vehicles/review/${id}`,
         {
           method: "POST",
           headers: {

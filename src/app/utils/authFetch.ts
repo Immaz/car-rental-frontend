@@ -24,7 +24,7 @@ export async function authFetch(url: string, options: RequestInit = {}) {
   if (!res.ok) {
     if (res.status == 401) {
       try {
-        await fetch(`${process.env.NEXT_BACKEND_API_URL}/auth/refresh`, {
+        await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/refresh`, {
           method: "POST",
           credentials: "include",
         })

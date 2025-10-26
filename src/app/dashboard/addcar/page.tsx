@@ -38,7 +38,7 @@ export default function AddCar() {
       });
 
       const res = await authFetch(
-        `${process.env.NEXT_BACKEND_API_URL}/vehicles`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/vehicles`,
         {
           method: "POST",
           body: formData,

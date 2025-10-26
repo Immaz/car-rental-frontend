@@ -18,10 +18,10 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         const [carsRes, bookingsRes] = await Promise.all([
-          fetch(`${process.env.NEXT_BACKEND_API_URL}/vehicles`, {
+          fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/vehicles`, {
             method: "GET",
           }),
-          authFetch(`${process.env.NEXT_BACKEND_API_URL}//bookings`, {
+          authFetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}//bookings`, {
             method: "GET",
           }),
         ]);

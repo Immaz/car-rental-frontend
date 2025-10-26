@@ -18,7 +18,7 @@ const ForgotPasswordUser = () => {
       setPassmatch(true);
       const formData = new FormData(e.currentTarget);
       const updateStatus = await authFetch(
-        `${process.env.NEXT_BACKEND_API_URL}/users/`,
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/`,
         {
           method: "PATCH",
           body: formData,

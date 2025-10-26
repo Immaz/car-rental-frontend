@@ -49,17 +49,20 @@ export default function EditUser() {
   function submit(e: any) {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
-    authFetch(`${process.env.NEXT_BACKEND_API_URL}/users/${userId}/edit`, {
-      method: "PATCH",
-      body: formdata,
-    }).then((response) => {
+    authFetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/${userId}/edit`,
+      {
+        method: "PATCH",
+        body: formdata,
+      }
+    ).then((response) => {
       redirect("/dashboard/manageusers");
     });
   }
 
   async function getUserById(userId: any) {
     const user = await authFetch(
-      `${process.env.NEXT_BACKEND_API_URL}/users/${userId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/users/${userId}`,
       {
         method: "GET",
       }

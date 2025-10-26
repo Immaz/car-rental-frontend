@@ -43,7 +43,7 @@ export default function SearchBody() {
     const fetchVehicles = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_BACKEND_API_URL}/vehicles/search`,
+          `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/vehicles/search`,
           {
             method: "POST",
             headers: { "Content-type": "application/json" },
@@ -67,7 +67,7 @@ export default function SearchBody() {
       ...filters,
     };
 
-    await fetch(`${process.env.NEXT_BACKEND_API_URL}/vehicles/search`, {
+    await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/vehicles/search`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data }),

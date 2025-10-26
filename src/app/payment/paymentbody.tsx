@@ -73,7 +73,7 @@ function CheckoutForm({
       if (pi && pi.status === "succeeded") {
         // Payment succeeded -> finalize booking on your backend
         const res = await authFetch(
-          `${process.env.NEXT_BACKEND_API_URL}/bookings`,
+          `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/bookings`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -171,7 +171,7 @@ export default function PaymentPage() {
       try {
         setLoadingIntent(true);
         const res = await authFetch(
-          `${process.env.NEXT_BACKEND_API_URL}/payments/stripe`,
+          `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/payments/stripe`,
           {
             method: "POST",
             headers: {
