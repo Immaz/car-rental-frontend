@@ -17,7 +17,7 @@ export default function UpdateCar() {
   // Fetch vehicle by id
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:4000/vehicles/${id}`)
+      fetch(`${process.env.NEXT_BACKEND_API_URL}/vehicles/${id}`)
         .then((res) => res.json())
         .then((body) => {
           if (body.status === "success") {
@@ -63,10 +63,13 @@ export default function UpdateCar() {
         },
       });
       const form = new FormData(e.currentTarget as any);
-      const res = await authFetch(`http://localhost:4000/vehicles/${id}`, {
-        method: "PATCH",
-        body: form,
-      });
+      const res = await authFetch(
+        `${process.env.NEXT_BACKEND_API_URL}/vehicles/${id}`,
+        {
+          method: "PATCH",
+          body: form,
+        }
+      );
 
       const response = await res.json();
 

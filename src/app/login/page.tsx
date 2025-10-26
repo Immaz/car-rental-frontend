@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-dynamic";
 import LoginElement from "./login";
 import React, { Suspense } from "react";
 

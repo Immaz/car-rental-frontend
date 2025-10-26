@@ -15,7 +15,7 @@ export default function ManageCars() {
   // Fetch vehicles
   useEffect(() => {
     const userId = localStorage.getItem("userId");
-    authFetch("http://localhost:4000/vehicles")
+    authFetch(`${process.env.NEXT_BACKEND_API_URL}vehicles`)
       .then((res) => res.json())
       .then((body) => {
         let cars = body.data;
@@ -30,9 +30,12 @@ export default function ManageCars() {
     if (!confirm("Are you sure you want to delete this vehicle?")) return;
 
     try {
-      const res = await authFetch(`http://localhost:4000/vehicles/${id}`, {
-        method: "DELETE",
-      });
+      const res = await authFetch(
+        `${process.env.NEXT_BACKEND_API_URL}/vehicles/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (res.ok) {
         setCars(cars.filter((car) => car.id !== id));
       }

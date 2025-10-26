@@ -49,7 +49,7 @@ export default function EditUser() {
   function submit(e: any) {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
-    authFetch(`http://localhost:4000/users/${userId}/edit`, {
+    authFetch(`${process.env.NEXT_BACKEND_API_URL}/users/${userId}/edit`, {
       method: "PATCH",
       body: formdata,
     }).then((response) => {
@@ -58,9 +58,12 @@ export default function EditUser() {
   }
 
   async function getUserById(userId: any) {
-    const user = await authFetch(`http://localhost:4000/users/${userId}`, {
-      method: "GET",
-    })
+    const user = await authFetch(
+      `${process.env.NEXT_BACKEND_API_URL}/users/${userId}`,
+      {
+        method: "GET",
+      }
+    )
       .then((response) => response.json())
       .then((body) => {
         setUser(body.data.user);

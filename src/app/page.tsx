@@ -1,26 +1,27 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { Vehicle } from "./search/search";
 
 export default function Home() {
   const [pickupDate, Setpickupdate] = useState("");
   const [vehicles, setVehicles] = useState([]);
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:4000/vehicles")
+    console.log(`backend api url : ${process.env.NEXT_PUBLIC_BACKEND_API_URL}`);
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/vehicles`)
       .then((res) => res.json())
       .then((json) => {
         if (json.status === "success") {
           // randomly selecting 3 vehicle here
-          for (let i = 0; i < 3; i++) {
-            const rand = Math.random() * 3;
-          }
+          // for (let i = 0; i < 3; i++) {
+          //   const rand = Math.random() * 3;
+          // }
           setVehicles(json.data);
         }
       })
-      .catch((err) => console.error("Error fetching vehicles:", err))
-      .finally(() => setLoading(false));
+      .catch((err) => console.error("Error fetching vehicles:", err));
   }, []);
   return (
     <div>
@@ -145,9 +146,9 @@ export default function Home() {
             adventure.
           </p>
           <div className="features-grid">
-            {vehicles.map((v) => (
+            {vehicles.map((v: Vehicle) => (
               // insert the <article> above here
-              <article className="car-card">
+              <article key={v.id} className="car-card">
                 <div className="card-image-container">
                   <img
                     src={
@@ -249,9 +250,9 @@ export default function Home() {
               </div>
               <blockquote>
                 <p>
-                  "I've used many booking platforms before, but none compare to
+                  {`I've used many booking platforms before, but none compare to
                   the personalized experience and attention to detail that
-                  CarRental provides."
+                  CarRental provides.`}
                 </p>
               </blockquote>
             </article>
@@ -276,9 +277,9 @@ export default function Home() {
               </div>
               <blockquote>
                 <p>
-                  "I've used many booking platforms before, but none compare to
+                  {`I've used many booking platforms before, but none compare to
                   the personalized experience and attention to detail that
-                  CarRental provides."
+                  CarRental provides.`}
                 </p>
               </blockquote>
             </article>
@@ -303,9 +304,9 @@ export default function Home() {
               </div>
               <blockquote>
                 <p>
-                  "I've used many booking platforms before, but none compare to
+                  {`I've used many booking platforms before, but none compare to
                   the personalized experience and attention to detail that
-                  CarRental provides."
+                  CarRental provides.`}
                 </p>
               </blockquote>
             </article>

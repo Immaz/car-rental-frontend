@@ -21,7 +21,7 @@ export default function ManageUsers() {
   const [users, setUsers] = useState([]);
 
   function deleteUser(user_id: number) {
-    authFetch(`http://localhost:4000/users/${user_id}/delete`, {
+    authFetch(`${process.env.NEXT_BACKEND_API_URL}/users/${user_id}/delete`, {
       method: "DELETE",
     })
       .then((resp) => resp.json())
@@ -30,7 +30,7 @@ export default function ManageUsers() {
       });
   }
   useEffect(() => {
-    authFetch("http://localhost:4000/users", {
+    authFetch(`${process.env.NEXT_BACKEND_API_URL}//users`, {
       method: "get",
     })
       .then((resp) => resp.json())

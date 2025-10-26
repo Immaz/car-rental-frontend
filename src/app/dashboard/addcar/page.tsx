@@ -37,10 +37,13 @@ export default function AddCar() {
         },
       });
 
-      const res = await authFetch("http://localhost:4000/vehicles", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await authFetch(
+        `${process.env.NEXT_BACKEND_API_URL}/vehicles`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const body = await res.json();
 

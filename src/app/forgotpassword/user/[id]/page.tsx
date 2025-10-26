@@ -17,10 +17,13 @@ const ForgotPasswordUser = () => {
     if (pass === confirmpass) {
       setPassmatch(true);
       const formData = new FormData(e.currentTarget);
-      const updateStatus = await authFetch(`http://localhost:4000/users/`, {
-        method: "PATCH",
-        body: formData,
-      })
+      const updateStatus = await authFetch(
+        `${process.env.NEXT_BACKEND_API_URL}/users/`,
+        {
+          method: "PATCH",
+          body: formData,
+        }
+      )
         .then((response) => response.json())
         .then((body) => (body.status === "success" ? true : false));
 

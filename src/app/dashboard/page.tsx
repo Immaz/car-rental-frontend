@@ -18,8 +18,12 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         const [carsRes, bookingsRes] = await Promise.all([
-          fetch("http://localhost:4000/vehicles", { method: "GET" }),
-          authFetch("http://localhost:4000/bookings", { method: "GET" }),
+          fetch(`${process.env.NEXT_BACKEND_API_URL}/vehicles`, {
+            method: "GET",
+          }),
+          authFetch(`${process.env.NEXT_BACKEND_API_URL}//bookings`, {
+            method: "GET",
+          }),
         ]);
 
         const carsData = await carsRes.json();

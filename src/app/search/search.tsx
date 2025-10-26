@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
 import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Footer from "@/app/components/Footer";
@@ -43,11 +42,14 @@ export default function SearchBody() {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        const res = await fetch("http://localhost:4000/vehicles/search", {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ query, ...filters }),
-        });
+        const res = await fetch(
+          `${process.env.NEXT_BACKEND_API_URL}/vehicles/search`,
+          {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({ query, ...filters }),
+          }
+        );
         const body = await res.json();
         setVehicles(body.data || []);
       } catch (err) {
@@ -65,7 +67,7 @@ export default function SearchBody() {
       ...filters,
     };
 
-    await fetch("http://localhost:4000/vehicles/search", {
+    await fetch(`${process.env.NEXT_BACKEND_API_URL}/vehicles/search`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data }),

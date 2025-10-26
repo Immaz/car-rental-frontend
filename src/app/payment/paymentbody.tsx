@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Header from "@/app/components/Header";
@@ -74,18 +72,21 @@ function CheckoutForm({
       const pi = result.paymentIntent;
       if (pi && pi.status === "succeeded") {
         // Payment succeeded -> finalize booking on your backend
-        const res = await authFetch("http://localhost:4000/bookings", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            vehicleId: bookingData.vehicleId,
-            from: bookingData.from,
-            to: bookingData.to,
-            total: bookingData.total,
-            booked_by: bookingData.booked_by,
-            paymentIntentId, // backend will verify with Stripe
-          }),
-        });
+        const res = await authFetch(
+          `${process.env.NEXT_BACKEND_API_URL}/bookings`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              vehicleId: bookingData.vehicleId,
+              from: bookingData.from,
+              to: bookingData.to,
+              total: bookingData.total,
+              booked_by: bookingData.booked_by,
+              paymentIntentId, // backend will verify with Stripe
+            }),
+          }
+        );
 
         if (!res.ok) {
           const body = await res.text();
@@ -169,13 +170,16 @@ export default function PaymentPage() {
     (async () => {
       try {
         setLoadingIntent(true);
-        const res = await authFetch("http://localhost:4000/payments/stripe", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ total: bookingData.total }),
-        });
+        const res = await authFetch(
+          `${process.env.NEXT_BACKEND_API_URL}/payments/stripe`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ total: bookingData.total }),
+          }
+        );
 
         if (!res.ok) {
           const txt = await res.text();

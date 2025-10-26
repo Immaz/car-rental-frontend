@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
@@ -17,7 +15,7 @@ const LoginElement = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const plainData = Object.fromEntries(formData.entries());
-    fetch("http://localhost:4000/users/login", {
+    fetch(`${process.env.NEXT_BACKEND_API_URL}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

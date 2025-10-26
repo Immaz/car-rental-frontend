@@ -49,7 +49,9 @@ export default function ManageBooking() {
 
   async function fetchBookings() {
     try {
-      const res = await authFetch("http://localhost:4000/bookings");
+      const res = await authFetch(
+        `${process.env.NEXT_BACKEND_API_URL}bookings`
+      );
       const body = await res.json();
       const bookings = Object.values(body.data);
       setBookings(bookings as any);
@@ -61,7 +63,7 @@ export default function ManageBooking() {
   async function cancelBooking(id: number) {
     try {
       setLoadingId(id);
-      await authFetch(`http://localhost:4000/bookings/cancel`, {
+      await authFetch(`${process.env.NEXT_BACKEND_API_URL}/bookings/cancel`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

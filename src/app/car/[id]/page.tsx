@@ -28,7 +28,9 @@ export default function CarView() {
 
   async function fetchVehicle() {
     try {
-      const res = await fetch(`http://localhost:4000/vehicles/${id}`);
+      const res = await fetch(
+        `${process.env.NEXT_BACKEND_API_URL}/vehicles/${id}`
+      );
       const body = await res.json();
       setVehicle(body.data);
     } catch (err) {
@@ -37,7 +39,9 @@ export default function CarView() {
   }
   async function fetchReviews() {
     try {
-      const res = await fetch(`http://localhost:4000/vehicles/reviews/${id}`);
+      const res = await fetch(
+        `${process.env.NEXT_BACKEND_API_URL}/vehicles/reviews/${id}`
+      );
       const body = await res.json();
       const reviews = Object.values(body.data);
       let totalRatings: number = 0;
@@ -58,7 +62,9 @@ export default function CarView() {
 
   async function fetchBooking() {
     try {
-      const res = await fetch(`http://localhost:4000/bookings/vehicle/${id}`);
+      const res = await fetch(
+        `${process.env.NEXT_BACKEND_API_URL}/bookings/vehicle/${id}`
+      );
       const body = await res.json();
       const bookings = body.data;
       const bookedDays: any[] = [];
@@ -116,7 +122,7 @@ export default function CarView() {
     const newReview = { name, rating, text: review, vehicle_id: id };
     try {
       const res = await authFetch(
-        `http://localhost:4000/vehicles/review/${id}`,
+        `${process.env.NEXT_BACKEND_API_URL}/vehicles/review/${id}`,
         {
           method: "POST",
           headers: {

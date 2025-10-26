@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const mailSentStatus = await authFetch(
-      "http://localhost:4000/users/checkmail",
+      `${process.env.NEXT_BACKEND_API_URL}/users/checkmail`,
       {
         method: "POST",
         body: formData,
